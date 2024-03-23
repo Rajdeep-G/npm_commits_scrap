@@ -1,0 +1,79 @@
+{
+    "sha": "1114a12f2b4691d403d0863d4dca44f25580f57d",
+    "node_id": "C_kwDOCFbcVdoAKDExMTRhMTJmMmI0NjkxZDQwM2QwODYzZDRkY2E0NGYyNTU4MGY1N2Q",
+    "commit": {
+        "author": {
+            "name": "David LJ",
+            "email": "mail@davidlj95.com",
+            "date": "2024-03-21T14:23:58Z"
+        },
+        "committer": {
+            "name": "GitHub",
+            "email": "noreply@github.com",
+            "date": "2024-03-21T14:23:58Z"
+        },
+        "message": "docs: fix incorrect npm audit key response link (#7307)",
+        "tree": {
+            "sha": "9945c75360e25852501e477d7f5937ef4ff663da",
+            "url": "https://api.github.com/repos/npm/cli/git/trees/9945c75360e25852501e477d7f5937ef4ff663da"
+        },
+        "url": "https://api.github.com/repos/npm/cli/git/commits/1114a12f2b4691d403d0863d4dca44f25580f57d",
+        "comment_count": 0,
+        "verification": {
+            "verified": true,
+            "reason": "valid",
+            "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJl/EL+CRC1aQ7uu5UhlAAA8hoQAEgiznE3yhk2SIHIXbWaDAKO\nOq8j/UOwbcE7WtkGpVB9G5vr3XtGhmeY32iMB9gfl/kuSQDyd2WWG10NknL1cuPr\nGq6kTaCmL1zKbkkh0v6TMwewMHK6dEFu/xrU3jTviYz1JZ8lguASzcY5kOsL4uiw\n8w1jLZUCz644g259lnQ2jpEytw9HCFFO/dKTzYBUmC/GokG6h8QT/xzrj4eoup3V\n5Yopzs3dnX7r98C4EyOt5ZixvaQoXfrl8SNHPMDVHH7IrVg5tXI61IYSJ30n0mZf\nM3wDliVWE6emq7bqc5CcdR0zX6jBqTB06JHsFgoooVgfhIuEKgr5y8ecAFPFatcO\n0a5rU93k2YPqaSHhtJ/kf1EhEB2ATc3/LQqT+leDFiXfOodIZji1fJA0xKkEiP9w\n/X8VvK+C2qj0UC4iE0Kd4vlZ6Pt88iK+M5vFClsyYAeUF81DxnhC9A2Ew5Yk0zR7\nH3NYfaDc+CR1Gra0b+b1PUQnd32kR0D+irOCJg+NpWI0pjcysNIMUJ8w2c3iWcMO\nxlNULCmwyPsz8TTL3IARKtW3NiiRFlCCMhyKgpvwnSUb4sonvhNLcq5OYV3+RYBW\nMoIQyaznPR8Oe3Y/uyN/NhijbxY7EwAS6E5ei61qro+GjBw6jXNqk3Znw5vhWito\nmtti6KrOxPqAhWEka/bA\n=eo2x\n-----END PGP SIGNATURE-----\n",
+            "payload": "tree 9945c75360e25852501e477d7f5937ef4ff663da\nparent 9807cafbaf274eca2a0abbd04a9b2b55e850de9d\nauthor David LJ <mail@davidlj95.com> 1711031038 +0100\ncommitter GitHub <noreply@github.com> 1711031038 -0700\n\ndocs: fix incorrect npm audit key response link (#7307)\n\n"
+        }
+    },
+    "url": "https://api.github.com/repos/npm/cli/commits/1114a12f2b4691d403d0863d4dca44f25580f57d",
+    "html_url": "https://github.com/npm/cli/commit/1114a12f2b4691d403d0863d4dca44f25580f57d",
+    "comments_url": "https://api.github.com/repos/npm/cli/commits/1114a12f2b4691d403d0863d4dca44f25580f57d/comments",
+    "author": {
+        "login": "davidlj95",
+        "id": 8050648,
+        "node_id": "MDQ6VXNlcjgwNTA2NDg=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/8050648?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/davidlj95",
+        "html_url": "https://github.com/davidlj95",
+        "followers_url": "https://api.github.com/users/davidlj95/followers",
+        "following_url": "https://api.github.com/users/davidlj95/following{/other_user}",
+        "gists_url": "https://api.github.com/users/davidlj95/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/davidlj95/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/davidlj95/subscriptions",
+        "organizations_url": "https://api.github.com/users/davidlj95/orgs",
+        "repos_url": "https://api.github.com/users/davidlj95/repos",
+        "events_url": "https://api.github.com/users/davidlj95/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/davidlj95/received_events",
+        "type": "User",
+        "site_admin": false
+    },
+    "committer": {
+        "login": "web-flow",
+        "id": 19864447,
+        "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/web-flow",
+        "html_url": "https://github.com/web-flow",
+        "followers_url": "https://api.github.com/users/web-flow/followers",
+        "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+        "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+        "organizations_url": "https://api.github.com/users/web-flow/orgs",
+        "repos_url": "https://api.github.com/users/web-flow/repos",
+        "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/web-flow/received_events",
+        "type": "User",
+        "site_admin": false
+    },
+    "parents": [
+        {
+            "sha": "9807cafbaf274eca2a0abbd04a9b2b55e850de9d",
+            "url": "https://api.github.com/repos/npm/cli/commits/9807cafbaf274eca2a0abbd04a9b2b55e850de9d",
+            "html_url": "https://github.com/npm/cli/commit/9807cafbaf274eca2a0abbd04a9b2b55e850de9d"
+        }
+    ]
+}
