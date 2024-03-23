@@ -1,1 +1,5 @@
 config.py
+scratch_work/config.py
+*.html
+*.pdf
+*.txt

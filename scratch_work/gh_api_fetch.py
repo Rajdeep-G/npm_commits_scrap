@@ -1,16 +1,8 @@
 import requests
 from config import API_KEY
 token=API_KEY
-def get_commits(repo_owner, repo_name):
-    # url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/commits"
-    # response = requests.get(url)
+def get_all_commits(repo_owner, repo_name):
     
-    # if response.status_code == 200:
-    #     commits = response.json()
-    #     return commits
-    # else:
-    #     print(f"Failed to fetch commits. Status code: {response.status_code}")
-    #     return None
     url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/commits"
     params = {'per_page': 100}  # Request up to 100 commits per page
     headers = {'Authorization': f'token {token}'}
@@ -29,6 +21,17 @@ def get_commits(repo_owner, repo_name):
 
     return commits
 
+def get_30_commits(repo_owner, repo_name):
+    url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/commits"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        commits = response.json()
+        return commits
+    else:
+        print(f"Failed to fetch commits. Status code: {response.status_code}")
+        return None
+
 def download_webpage(url,name):
     try:
         response = requests.get(url)
@@ -43,10 +46,10 @@ def download_webpage(url,name):
         print(f"Error downloading webpage: {e}")
 
 
-# Example usage
+
 repo_owner = "npm"
 repo_name = "cli"
-commits = get_commits(repo_owner, repo_name)
+commits = get_all_commits(repo_owner, repo_name)
 
 fixed_commit_ur=f'https://github.com/{repo_owner}/{repo_name}/commit/'
 
@@ -60,10 +63,10 @@ if commits:
             url=fixed_commit_ur+commit['sha']
             filename_commit=commit['sha']+'.html'
             all_files.append(filename_commit)
-            # download_webpage(url,filename_commit)
+            download_webpage(url,filename_commit)
             
 print(len(all_files))
-# with open('all_files_names.txt', 'w') as file:
-#     for filename in all_files:
-#         file.write(f"{filename}\n")
-#     print(f"All filenames written to 'all_files.txt'")
+with open('all_files_names.txt', 'w') as file:
+    for filename in all_files:
+        file.write(f"{filename}\n")
+    print(f"All filenames written to 'all_files.txt'")

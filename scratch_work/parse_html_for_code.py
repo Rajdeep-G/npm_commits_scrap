@@ -3,9 +3,13 @@
 from bs4 import BeautifulSoup
 
 def get_all(filename):
-    with open(f'../all_commits/{filename}', 'r') as file:
-        html_content = file.read()
-
+    try:
+        with open(f'../all_commits/{filename}', 'r') as file:
+            html_content = file.read()
+    except:
+        print(f"Error in {filename}")
+        return
+    
     soup = BeautifulSoup(html_content, 'html.parser')
 
 
@@ -41,17 +45,23 @@ def get_all(filename):
         data_list[i]['content'] = code
         # print(code)
         # print('-' * 50)
-    for i in range(len(data_list)):
-        print(f"{data_list[i]}")
-        print('-' * 50)
+    try:
+        filename= filename.split('.')[0]
+        with open (f'../all_codes/{filename}.txt', 'w') as file:
+            for i in range(len(data_list)):
+                # print(f"{data_list[i]}")
+                file.write(f"{data_list[i]}\n")
+    except:
+        print(f"Error in {filename}")
+                # print('-' * 50)
 
 
 
 with open('all_files_names.txt', 'r') as file:
     filenames = file.read().splitlines()
     # print(filenames)
-    for filename in filenames[:2]:
+    for filename in filenames:
         print(f"Processing {filename}")
         get_all(filename)
-        print('-' * 50)
-        print('\n')
+        # print('-' * 50)
+        # print('\n')
