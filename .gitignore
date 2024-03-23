@@ -1,5 +1,8 @@
 config.py
 scratch_work/config.py
+names.json
 *.html
 *.pdf
 *.txt
+*.csv
+*.json
