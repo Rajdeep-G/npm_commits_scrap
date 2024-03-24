@@ -2,6 +2,7 @@ import requests
 
 from config import API_KEY
 from datetime import datetime
+import gzip
 import os
 token=API_KEY
 def get_all_commits(repo_owner, repo_name):
@@ -42,7 +43,7 @@ def download_webpage(url,name,org_name):
             # with open('webpage.html', 'wb') as file:
             # create a folder named all_commits in the current directory
             os.makedirs(f'../{org_name}', exist_ok=True)
-            with open(f'../{org_name}/{name}', 'wb') as file:
+            with gzip.open(f'../{org_name}/{name}.gz', 'wb') as file:
                 file.write(response.content)
             print(f"Webpage downloaded successfully as '{name}'")
         else:
@@ -72,6 +73,7 @@ def flow(repo_owner, repo_name,org_name):
     with open(f'{org_name}_file_names.txt', 'w') as file:
         for filename in all_files:
             file.write(f"{filename}\n")
+            
         # print(f"All filenames written to 'all_files.txt'")
 
 start_time_global = datetime.now()
@@ -79,7 +81,7 @@ start_time_global = datetime.now()
 gh_links = []
 with open("../gh_links.txt", "r") as file:
     all_files = file.read().splitlines()
-    for line in all_files[:5]:
+    for line in all_files[:2]:
         temp=[]
         temp.append(line.split()[0])
         temp.append(line.split()[1])

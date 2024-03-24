@@ -2,9 +2,10 @@
 import os
 from bs4 import BeautifulSoup
 from datetime import datetime
+import gzip
 def get_all(filename, path_name):
     try:
-        with open(f'../{path_name}/{filename}', 'r') as file:
+        with gzip.open(f'../{path_name}/{filename}.gz', 'r') as file:
             html_content = file.read()
     except:
         print(f"Error iiin {filename}")
@@ -61,7 +62,7 @@ start_time_global = datetime.now()
 with open('../gh_links.txt', 'r') as file:
     gh_links = file.read().splitlines()
     # print(gh_links)
-    for link in gh_links[:5]:
+    for link in gh_links[:2]:
         if not link:
             continue
         temp = link.split()
