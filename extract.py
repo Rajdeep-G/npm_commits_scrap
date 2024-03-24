@@ -2,12 +2,13 @@ import requests
 from bs4 import BeautifulSoup
 
 # List of repository names
-npm_package_names = [
-  "@dotcom-reliability-kit/serialize-request",
-  "@dotcom-tool-kit/babel",
-  "@dotcom-tool-kit/backend-app",
+# npm_package_names = [
+#   "@dotcom-reliability-kit/serialize-request",
+#   "@dotcom-tool-kit/babel",
+#   "@dotcom-tool-kit/backend-app",
 
-]
+# ]
+
 with open("names.json", "r") as file:
     npm_package_names = file.read().splitlines()
 
@@ -20,7 +21,7 @@ for x in range(0, len(npm_package_names)):
 # print(npm_package_names[100:105])
 
 with open ("gh_links.txt", "w") as file:
-    for npm_package_name in npm_package_names[100:200]:
+    for npm_package_name in npm_package_names[1300:1330]:
         try:
             npm_url = f"https://www.npmjs.com/package/{npm_package_name}"
             # print(npm_url)

@@ -1,13 +1,13 @@
 # from a particular commit, it scraps the + and - lines of code from the html file
-
+import os
 from bs4 import BeautifulSoup
 
-def get_all(filename):
+def get_all(filename, path_name):
     try:
-        with open(f'../all_commits/{filename}', 'r') as file:
+        with open(f'../{path_name}/{filename}', 'r') as file:
             html_content = file.read()
     except:
-        print(f"Error in {filename}")
+        print(f"Error iiin {filename}")
         return
     
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -43,11 +43,12 @@ def get_all(filename):
             code = code.replace('  ', ' ')
             code= code.replace('\n', ' ')
         data_list[i]['content'] = code
-        # print(code)
-        # print('-' * 50)
+        print(code)
+    print('++' * 50)
     try:
         filename= filename.split('.')[0]
-        with open (f'../all_codes/{filename}.txt', 'w') as file:
+        # os.mkdir(f'../codes_{path_name}',exist_ok=True)
+        with open (f'../codes_{path_name}/{filename}.txt', 'w') as file:
             for i in range(len(data_list)):
                 # print(f"{data_list[i]}")
                 file.write(f"{data_list[i]}\n")
@@ -57,11 +58,20 @@ def get_all(filename):
 
 
 
-with open('all_files_names.txt', 'r') as file:
-    filenames = file.read().splitlines()
-    # print(filenames)
-    for filename in filenames:
-        print(f"Processing {filename}")
-        get_all(filename)
-        # print('-' * 50)
-        # print('\n')
+with open('../gh_links.txt', 'r') as file:
+    gh_links = file.read().splitlines()
+    # print(gh_links)
+    for link in gh_links:
+        temp = link.split()
+        path_name = temp[0]
+        
+        os.mkdir(f'../codes_{path_name}')
+        with open(f'{path_name}_file_names.txt', 'r') as file:
+            filenames = file.read().splitlines()
+            # print(filenames)
+            for filename in filenames:
+                print(f"Processing {filename}")
+                get_all(filename, path_name)
+                
+                # print('\n')
+        print('-' * 50)
