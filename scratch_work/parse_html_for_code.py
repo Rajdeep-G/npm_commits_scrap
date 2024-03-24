@@ -1,7 +1,7 @@
 # from a particular commit, it scraps the + and - lines of code from the html file
 import os
 from bs4 import BeautifulSoup
-
+from datetime import datetime
 def get_all(filename, path_name):
     try:
         with open(f'../{path_name}/{filename}', 'r') as file:
@@ -43,7 +43,7 @@ def get_all(filename, path_name):
             code = code.replace('  ', ' ')
             code= code.replace('\n', ' ')
         data_list[i]['content'] = code
-        print(code)
+        # print(code)
     print('++' * 50)
     try:
         filename= filename.split('.')[0]
@@ -57,15 +57,18 @@ def get_all(filename, path_name):
                 # print('-' * 50)
 
 
-
+start_time_global = datetime.now()
 with open('../gh_links.txt', 'r') as file:
     gh_links = file.read().splitlines()
     # print(gh_links)
-    for link in gh_links:
+    for link in gh_links[:5]:
+        if not link:
+            continue
         temp = link.split()
+        
         path_name = temp[0]
         
-        os.mkdir(f'../codes_{path_name}')
+        os.makedirs(f'../codes_{path_name}', exist_ok=True)
         with open(f'{path_name}_file_names.txt', 'r') as file:
             filenames = file.read().splitlines()
             # print(filenames)
@@ -75,3 +78,5 @@ with open('../gh_links.txt', 'r') as file:
                 
                 # print('\n')
         print('-' * 50)
+end_time_global = datetime.now()
+print(f"Total time taken: {end_time_global - start_time_global}")

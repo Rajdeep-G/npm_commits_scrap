@@ -1,5 +1,7 @@
 import requests
+
 from config import API_KEY
+from datetime import datetime
 import os
 token=API_KEY
 def get_all_commits(repo_owner, repo_name):
@@ -66,17 +68,18 @@ def flow(repo_owner, repo_name,org_name):
                 all_files.append(filename_commit)
                 download_webpage(url,filename_commit,org_name)
                 
-    print(len(all_files))
+    # print(len(all_files))
     with open(f'{org_name}_file_names.txt', 'w') as file:
         for filename in all_files:
             file.write(f"{filename}\n")
         # print(f"All filenames written to 'all_files.txt'")
 
+start_time_global = datetime.now()
 
 gh_links = []
 with open("../gh_links.txt", "r") as file:
     all_files = file.read().splitlines()
-    for line in all_files:
+    for line in all_files[:5]:
         temp=[]
         temp.append(line.split()[0])
         temp.append(line.split()[1])
@@ -84,13 +87,17 @@ with open("../gh_links.txt", "r") as file:
         gh_links.append(temp)
 
 for link in gh_links:
+    start_time = datetime.now()
     repo_owner=link[1]
     repo_name=link[2]
     org_name=link[0]
     print(repo_owner,repo_name,org_name)
     flow(repo_owner, repo_name,org_name)
+    end_time = datetime.now()
+    print(f"Time taken: {end_time - start_time}")
     
 
-
+end_time_global = datetime.now()
+print(f"Total time taken: {end_time_global - start_time_global}")
 # repo_owner = "npm"
 # repo_name = "cli"
