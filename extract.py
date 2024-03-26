@@ -71,7 +71,7 @@ popular_npm_packages = [
 ]
 
 start_time = datetime.now()
-for npm_package_name in npm_package_names[:500]:
+for npm_package_name in npm_package_names[:30]:
     extract_github_link(npm_package_name)
 
 
