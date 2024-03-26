@@ -36,29 +36,31 @@ popular_npm_packages = [
     "typescript"
 ]
 
-with open("gh_links.txt", "w") as file:
-    for npm_package_name in npm_package_names[2000:5000]:
-        try:
-            npm_url = f"https://www.npmjs.com/package/{npm_package_name}"
-            # print(npm_url)
 
-            response = requests.get(npm_url)
-            response.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
-            soup = BeautifulSoup(response.text, "html.parser")
+for npm_package_name in npm_package_names[2300:2350]:
+    try:
+        npm_url = f"https://www.npmjs.com/package/{npm_package_name}"
+        # print(npm_url)
 
-            github_link_element = soup.select_one('a[href*="github.com"]')
-            if github_link_element:
-                github_link = github_link_element["href"]
-                user_name = github_link.split('/')[3]
-                repo_name = github_link.split('/')[4]
-                if repo_name not in popular_npm_packages:
-                    file.write(
-                        f"{npm_package_name} {user_name} {repo_name} {github_link}\n")
-            else:
-                print(f"No GitHub link found for {npm_package_name}")
+        response = requests.get(npm_url)
+        response.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
+        soup = BeautifulSoup(response.text, "html.parser")
 
-        except Exception as e:
-            print(f"Error processing npm package '{npm_package_name}': {e}")
+        github_link_element = soup.select_one('a[href*="github.com"]')
+        if github_link_element:
+            github_link = github_link_element["href"]
+            user_name = github_link.split('/')[3]
+            repo_name = github_link.split('/')[4]
+            if repo_name not in popular_npm_packages:
+                with open("gh_links2.txt", "a+") as file:
+                    file.write(f"{npm_package_name} {user_name} {repo_name} {github_link}")
+                    file.write("\n")
+                file.close()
+        else:
+            print(f"No GitHub link found for {npm_package_name}")
+
+    except Exception as e:
+        print(f"Error processing npm package '{npm_package_name}': {e}")
 
 print("Done")
 end_time = datetime.now()
