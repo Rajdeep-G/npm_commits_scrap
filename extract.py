@@ -9,8 +9,42 @@ from datetime import datetime
 
 # ]
 
+
+def extract_github_link(npm_package_name):    
+    try:
+        npm_url = f"https://www.npmjs.com/package/{npm_package_name}"
+        # print(npm_url)
+
+        response = requests.get(npm_url)
+        response.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
+        soup = BeautifulSoup(response.text, "lxml")
+
+        # github_link_element = soup.select_one('a[href*="github.com"]')
+        github_link_element=None
+        github_link_element_all = [link["href"] for link in soup.select('a[href*="github.com"]')]
+        for x in github_link_element_all:
+            # count no of "/" in the link
+            if x.count("/") ==4:
+                github_link_element=x
+                break
+        if github_link_element:
+            github_link = github_link_element
+            user_name = github_link.split('/')[3]
+            repo_name = github_link.split('/')[4]
+            if repo_name not in popular_npm_packages:
+                with open("gh_links3.txt", "a+") as file:
+                    file.write(f"{npm_package_name} {user_name} {repo_name} {github_link}")
+                    file.write("\n")
+                file.close()
+        else:
+            print(f"No GitHub link found for {npm_package_name}")
+
+    except Exception as e:
+        print(f"Error processing npm package '{npm_package_name}': {e}")
+
+
 # print start time
-start_time = datetime.now()
+
 with open("names.json", "r") as file:
     npm_package_names = file.read().splitlines()
 
@@ -36,31 +70,10 @@ popular_npm_packages = [
     "typescript"
 ]
 
+start_time = datetime.now()
+for npm_package_name in npm_package_names[:500]:
+    extract_github_link(npm_package_name)
 
-for npm_package_name in npm_package_names[2300:2350]:
-    try:
-        npm_url = f"https://www.npmjs.com/package/{npm_package_name}"
-        # print(npm_url)
-
-        response = requests.get(npm_url)
-        response.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
-        soup = BeautifulSoup(response.text, "html.parser")
-
-        github_link_element = soup.select_one('a[href*="github.com"]')
-        if github_link_element:
-            github_link = github_link_element["href"]
-            user_name = github_link.split('/')[3]
-            repo_name = github_link.split('/')[4]
-            if repo_name not in popular_npm_packages:
-                with open("gh_links2.txt", "a+") as file:
-                    file.write(f"{npm_package_name} {user_name} {repo_name} {github_link}")
-                    file.write("\n")
-                file.close()
-        else:
-            print(f"No GitHub link found for {npm_package_name}")
-
-    except Exception as e:
-        print(f"Error processing npm package '{npm_package_name}': {e}")
 
 print("Done")
 end_time = datetime.now()
