@@ -88,25 +88,16 @@ for x in range(0, len(npm_package_names)):
     npm_package_names[x] = npm_package_names[x].replace('"', '')
     npm_package_names[x] = npm_package_names[x].replace(',', '')
 
-with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+with concurrent.futures.ThreadPoolExecutor() as executor:
     # executor.map(process_npm_package, npm_package_names)
     for i, npm_package_name in enumerate(npm_package_names[:100], start=1):
         executor.submit(process_npm_package, npm_package_name)
         if i % 5 == 0:
             time.sleep(5)
 
-time.sleep(10)
-print("Done with 1st batch")
 
-with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
-    # executor.map(process_npm_package, npm_package_names)
-    for i, npm_package_name in enumerate(npm_package_names[101:200], start=1):
-        executor.submit(process_npm_package, npm_package_name)
-        if i % 5 == 0:
-            time.sleep(5)
 
-time.sleep(10)
-print("Done with 2nd batch")
+
 
 print("ALL DONE")
 end_time = datetime.now()

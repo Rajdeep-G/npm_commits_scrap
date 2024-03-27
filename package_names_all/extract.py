@@ -1,16 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
-# List of repository names
-# npm_package_names = [
-#   "@dotcom-reliability-kit/serialize-request",
-#   "@dotcom-tool-kit/babel",
-#   "@dotcom-tool-kit/backend-app",
-
-# ]
 
 
-def extract_github_link(npm_package_name):    
+count=0
+def extract_github_link(npm_package_name,filename):
+    global count
     try:
         npm_url = f"https://www.npmjs.com/package/{npm_package_name}"
         # print(npm_url)
@@ -32,9 +27,10 @@ def extract_github_link(npm_package_name):
             user_name = github_link.split('/')[3]
             repo_name = github_link.split('/')[4]
             if repo_name not in popular_npm_packages:
-                with open("gh_links3.txt", "a+") as file:
+                with open(f"gh_links_{filename}.txt", "a+") as file:
                     file.write(f"{npm_package_name} {user_name} {repo_name} {github_link}")
                     file.write("\n")
+                    count+=1
                 file.close()
         else:
             print(f"No GitHub link found for {npm_package_name}")
@@ -44,8 +40,9 @@ def extract_github_link(npm_package_name):
 
 
 # print start time
-
-with open("names.json", "r") as file:
+chunk_number = 1
+filename = f"chunk_{chunk_number}.json"
+with open(filename, "r") as file:
     npm_package_names = file.read().splitlines()
 
 for x in range(0, len(npm_package_names)):
@@ -71,8 +68,8 @@ popular_npm_packages = [
 ]
 
 start_time = datetime.now()
-for npm_package_name in npm_package_names[:100]:
-    extract_github_link(npm_package_name)
+for npm_package_name in npm_package_names:
+    extract_github_link(npm_package_name,filename)
 
 
 print("Done")
@@ -80,3 +77,4 @@ end_time = datetime.now()
 
 # print time taken in minutes and seconds
 print(f"Time taken: {end_time - start_time}")
+print(f'Successfully extracted {count} github links from {filename}')
