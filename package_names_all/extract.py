@@ -1,7 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
-
+from time import sleep
+import sys
 
 count=0
 def extract_github_link(npm_package_name,filename):
@@ -40,7 +41,8 @@ def extract_github_link(npm_package_name,filename):
 
 
 # print start time
-chunk_number = 1
+# chunk_number = 1
+chunk_number = sys.argv[1]
 filename = f"chunk_{chunk_number}.json"
 with open(filename, "r") as file:
     npm_package_names = file.read().splitlines()
@@ -68,8 +70,13 @@ popular_npm_packages = [
 ]
 
 start_time = datetime.now()
+i=0
 for npm_package_name in npm_package_names:
     extract_github_link(npm_package_name,filename)
+    i+=1
+    if i%10==0:
+        print(f"Processed {i} npm packages")
+        sleep(5)
 
 
 print("Done")
