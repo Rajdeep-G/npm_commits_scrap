@@ -88,7 +88,7 @@ start_time_global = datetime.now()
 
 gh_links = []
 serial=1
-with open(f'o{serial}.txt', "r") as file:
+with open(f'links/o{serial}.txt', "r") as file:
     all_files = file.read().splitlines()
     for line in all_files[:10]:
         temp=[]
