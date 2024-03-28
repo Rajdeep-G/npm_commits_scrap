@@ -3,6 +3,8 @@ scratch_work/config.py
 names.json
 *.html
 *.pdf
-*.txt
 *.csv
 *.json
+*.txt 
+# all txt except the one in the package_names_all folder
+!package_names_all/*.txt
