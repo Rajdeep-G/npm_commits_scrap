@@ -67,7 +67,7 @@ serial=1
 with open(f'links/o{serial}.txt', "r") as file:
     gh_links = file.read().splitlines()
     # print(gh_links)
-    for link in gh_links[:10]:
+    for link in gh_links:
         if not link:
             continue
         temp = link.split()

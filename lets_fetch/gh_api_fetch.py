@@ -47,7 +47,7 @@ def download_webpage(url,name,org_name):
             os.makedirs(f'webpages/{org_name}', exist_ok=True)
             with gzip.open(f'webpages/{org_name}/{name}.gz', 'wb') as file:
                 file.write(response.content)
-            print(f"Webpage downloaded successfully as '{name}'")
+            # print(f"Webpage downloaded successfully as '{name}'")
         else:
             print(f"Failed to download webpage. Status code: {response.status_code}")
     except requests.exceptions.RequestException as e:
@@ -61,7 +61,13 @@ def flow(repo_owner, repo_name,org_name):
     fixed_commit_ur=f'https://github.com/{repo_owner}/{repo_name}/commit/'
     # print(fixed_commit_ur)
     all_files=[]
+    if commits is None:
+        return 0, 0
     commit_count=len(commits)
+    if commit_count>5000:
+        with open("large_repo.txt", "a") as file:
+            file.write(f"{repo_name} {org_name} {commit_count} {0}\n")
+        return commit_count, 0
     commit_count_fix=0
     if commits:
         print(f"Commits count: {len(commits)}")
@@ -87,22 +93,23 @@ def flow(repo_owner, repo_name,org_name):
 start_time_global = datetime.now()
 
 gh_links = []
-serial=1
+serial=2
 with open(f'links/o{serial}.txt', "r") as file:
     all_files = file.read().splitlines()
-    for line in all_files[:10]:
+    for line in all_files[181:]:
         temp=[]
         temp.append(line.split()[0])
         temp.append(line.split()[1])
         temp.append(line.split()[2])
         gh_links.append(temp)
-
+print_count=181
 for link in gh_links:
     start_time = datetime.now()
     repo_owner=link[1]
     repo_name=link[2]
     org_name=link[0]
-    print(repo_owner,repo_name,org_name)
+    print(f'{print_count}{repo_owner},{repo_name},{org_name}')
+    print_count+=1
     # flow(repo_owner, repo_name,org_name)
     commit_count, commit_count_fix = flow(repo_owner, repo_name,org_name)
     end_time = datetime.now()
