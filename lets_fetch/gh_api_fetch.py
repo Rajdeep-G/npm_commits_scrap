@@ -66,12 +66,12 @@ def flow(repo_owner, repo_name,org_name):
     commit_count=len(commits)
     if commit_count>5000:
         with open("large_repo.txt", "a") as file:
-            file.write(f"{repo_name} {org_name} {commit_count} {0}\n")
+            file.write(f"{repo_name} {org_name} {commit_count} 6\n")
         return commit_count, 0
     commit_count_fix=0
     if commits:
         print(f"Commits count: {len(commits)}")
-        for commit in commits:
+        for commit in tqdm(commits):
             # print(commit['sha'], commit['commit']['message'])
             if 'fix' in commit['commit']['message'].lower():
                 commit_count_fix+=1
@@ -91,19 +91,20 @@ def flow(repo_owner, repo_name,org_name):
 
 
 start_time_global = datetime.now()
-
+from tqdm import tqdm
 gh_links = []
-serial=2
+serial=1
 with open(f'links/o{serial}.txt', "r") as file:
     all_files = file.read().splitlines()
-    for line in all_files[181:]:
+    for line in all_files[:20]:
         temp=[]
         temp.append(line.split()[0])
         temp.append(line.split()[1])
         temp.append(line.split()[2])
         gh_links.append(temp)
-print_count=181
-for link in gh_links:
+print_count=1
+# for link in gh_links:
+for link in (gh_links):
     start_time = datetime.now()
     repo_owner=link[1]
     repo_name=link[2]
@@ -115,7 +116,7 @@ for link in gh_links:
     end_time = datetime.now()
     print(f"Time taken: {end_time - start_time}")
     # print(f"Total commits with 'fix' keyword: {commit_count_fix}")
-    with open("status.txt", "a") as file:
+    with open("1_status.txt", "a") as file:
         file.write(f"{repo_name} {org_name} {end_time - start_time} {commit_count} {commit_count_fix}\n")
     print("............................................")
     
