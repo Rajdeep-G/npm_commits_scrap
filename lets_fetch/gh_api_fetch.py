@@ -93,10 +93,10 @@ def flow(repo_owner, repo_name,org_name):
 start_time_global = datetime.now()
 from tqdm import tqdm
 gh_links = []
-serial=1
+serial=28
 with open(f'links/o{serial}.txt', "r") as file:
     all_files = file.read().splitlines()
-    for line in all_files[:20]:
+    for line in all_files:
         temp=[]
         temp.append(line.split()[0])
         temp.append(line.split()[1])
@@ -116,7 +116,7 @@ for link in (gh_links):
     end_time = datetime.now()
     print(f"Time taken: {end_time - start_time}")
     # print(f"Total commits with 'fix' keyword: {commit_count_fix}")
-    with open("1_status.txt", "a") as file:
+    with open("28_status.txt", "a") as file:
         file.write(f"{repo_name} {org_name} {end_time - start_time} {commit_count} {commit_count_fix}\n")
     print("............................................")
     
